@@ -1,0 +1,43 @@
+#app
+  
+  .audioplayer(v-for="s in sounddata")
+    //- label {{s.number}}
+    audio(v-bind:data-num="s.number")
+      source(v-bind:src ="s.url")
+  .center_box
+    h2 Vue.JS Piano
+    //- h1 {{playing_time+record_time}}
+    .keyboard
+      .pianokey(v-for='s in display_keys')
+        .white(v-if='s.type=="white"'
+               v-on:click='addnote(s.num)' 
+               v-bind:class='get_current_highlight(s.num)||(now_press_key==s.key)?"playing":""') 
+               label {{String.fromCharCode(s.key)}}({{s.num}}
+        .black(v-if='s.type=="black"'
+               v-on:click='addnote(s.num)' 
+               v-bind:class='get_current_highlight(s.num)||(now_press_key==s.key)?"playing":""') 
+               label {{String.fromCharCode(s.key)}}({{s.num}}
+    br    
+    .control
+      ul.notes_list(v-if="notes.length">0)
+        li(v-for="note,id in notes"
+           v-bind:class="now_note_id-1==id?\"playing\":\"\"")
+          .num {{note.num}}
+          .time {{note.time}}
+      //- button(v-on:click="playnext(1)") playnext
+      button(v-if="playing_time<=1"
+             v-on:click="startplay()") startplay 
+             i <i class="fas fa-play"></i>
+      button(v-if="playing_time>1"
+           v-on:click="stopplay()") stop play
+            i <i class="fas fa-square"></i>
+      button(v-on:click="notes=[]") clear
+            i <i class="far fa-file-excel"></i>
+      button(v-if="record_time<=0"
+           v-on:click="start_record()") record
+           i.fas.fa-record-vinyl
+      button(v-if="record_time>0"
+           v-on:click="stop_record()") stop record
+           i <i class="fas fa-pause"></i>
+      button(v-on:click="load_sample()") sample
+            i <i class="fas fa-music"></i>

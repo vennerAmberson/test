@@ -1,0 +1,107 @@
+$key_width: 44px
+$key_height: 300px
+$key_black: #585858
+$key_white: #eee
+
+
+@mixin size($w,$h)
+  width: $w
+  height: $h
+  
+*
+  vertical-align: top
+  backface-visibility: hidden
+  
+html,body
+  font-family: 微軟正黑體
+  padding: 0
+  margin: 0
+  +size(100%,100%)
+  
+.center_box
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+  text-align: center
+  width: 100%
+.pianokey
+  display: inline-block
+  position: relative
+  vertical-align: top
+.keyboard
+  box-shadow: 0px 0px 40px -5px rgba(0,0,0,0.4)
+  display: inline-block
+  margin-bottom: 30px
+  cursor: pointer
+.white
+  +size($key_width,$key_height)
+  border: 1px solid darken($key_white,10)
+  cursor: pointer
+  transform: translate(-3px, -3px)
+  transition: 0.1s
+  &:hover
+    transform: translate(0,0)
+    background-color: $key_white
+.black
+  +size($key_width/2,$key_height/2)
+  background-color: $key_black
+  // border: 1px solid #000
+  margin-left: -$key_width/4
+  margin-right: -$key_width/4
+  position: absolute
+  z-index: 22
+  cursor: pointer
+  transition: 0.1s
+  transform: translate(-3px, -3px)
+  &:hover
+    transform: translate(0,0)
+    background-color: darken($key_black,5)
+.white.playing
+  transform: translate(0,0)
+  background-color: $key_white
+.black.playing
+  transform: translate(0,0)
+  background-color: darken($key_black,5)
+label
+  position: absolute
+  color: rgba($key_black,0.5)
+  bottom: -25px
+  left: 50%
+  transform: translate(-50%, 0%)
+  font-size: 8px
+  
+li
+  display: inline-block
+  padding: 0px 5px
+  cursor: pointer
+  font-size: 15px
+  opacity: 80%
+  transition: 0.1s
+  &:hover
+    background-color: darken($key_white,10)
+  &.playing
+    background-color: darken($key_white,10)
+    
+  .num
+    border-bottom: 1px solid #000
+  .time
+    opacity: 60%
+    font-size: 10px
+button
+  background-color: transparent
+  border: none
+  border: 1px solid 
+  font-size: 20px
+  margin-top: 5px
+  padding: 4px 12px
+  border-radius: 4px
+  transition: 0.1s 0.2s
+  cursor: pointer
+  &:hover
+    background-color: lighten($key_black,10)
+    color: $key_white
+  i
+    padding-left: 5px
+  i.fas.fa-record-vinyl
+    color: darken(red,10)
