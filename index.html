@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - 11-9互動式鋼琴</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:image" content:https://i.imgur.com/scmCcOG.jpg>
+<meta property="og:title" content:互動式鋼琴>
+<meta property="og:description" content:用鍵盤當琴鍵，錄音製作自己的音樂>
+<meta property="og:url" content:https://codepen.io/KindalasInJesusLove/pen/OJjjNYr><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="app">
+  <div class="audioplayer" v-for="s in sounddata">
+    <audio v-bind:data-num="s.number">
+      <source v-bind:src="s.url"/>
+    </audio>
+  </div>
+  <div class="center_box">
+    <h2>Vue.JS Piano</h2>
+    <div class="keyboard">
+      <div class="pianokey" v-for="s in display_keys">
+        <div class="white" v-if="s.type==&quot;white&quot;" v-on:click="addnote(s.num)" v-bind:class="get_current_highlight(s.num)||(now_press_key==s.key)?&quot;playing&quot;:&quot;&quot;"> 
+          <label>{{String.fromCharCode(s.key)}}({{s.num}}</label>
+        </div>
+        <div class="black" v-if="s.type==&quot;black&quot;" v-on:click="addnote(s.num)" v-bind:class="get_current_highlight(s.num)||(now_press_key==s.key)?&quot;playing&quot;:&quot;&quot;"> 
+          <label>{{String.fromCharCode(s.key)}}({{s.num}}</label>
+        </div>
+      </div>
+    </div><br/>
+    <div class="control">
+      <ul class="notes_list">
+        <li v-for="note,id in notes" v-bind:class="now_note_id-1==id?&quot;playing&quot;:&quot;&quot;">
+          <div class="num">{{note.num}}</div>
+          <div class="time">{{note.time}}</div>
+        </li>
+      </ul>
+      <button v-if="playing_time&lt;=1" v-on:click="startplay()">startplay <i><i class="fas fa-play"></i></i></button>
+      <button v-if="playing_time&gt;1" v-on:click="stopplay()">stop play<i><i class="fas fa-square"></i></i></button>
+      <button v-on:click="notes=[]">clear<i><i class="far fa-file-excel"></i></i></button>
+      <button v-if="record_time&lt;=0" v-on:click="start_record()">record<i class="fas fa-record-vinyl"></i></button>
+      <button v-if="record_time&gt;0" v-on:click="stop_record()">stop record<i><i class="fas fa-pause"></i></i></button>
+      <button v-on:click="load_sample()">sample<i><i class="fas fa-music"></i></i></button>
+    </div>
+  </div>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
