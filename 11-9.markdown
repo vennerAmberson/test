@@ -1,7 +1,0 @@
-11-9互動式鋼琴
----------
-
-
-A [Pen](https://codepen.io/KindalasInJesusLove/pen/OJjjNYr) by [VennerAmberson](https://codepen.io/KindalasInJesusLove) on [CodePen](https://codepen.io).
-
-[License](https://codepen.io/KindalasInJesusLove/pen/OJjjNYr/license).
